@@ -1,0 +1,61 @@
+.header {
+  padding: 15px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.logo {
+  width: 90px;
+  height: 50px;
+}
+
+.nav {
+  display: flex;
+  gap: 50px;
+  align-items: center;
+}
+
+.link {
+  font-family: var(--accent-family);
+  color: var(--nav-color);
+  font-size: var(--nav-text);
+}
+
+.activeLink {
+  color: var(--nav-active-color);
+}
+
+.userInfo {
+  display: flex;
+  gap: 30px;
+}
+
+.profileInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3px;
+  font-family: var(--accent-family);
+  color: #fff;
+}
+
+.userName {
+  font-size: 18px;
+}
+
+.userTickets {
+  display: flex;
+  width: 100%;
+  gap: 4px;
+  justify-content: center;
+}
+
+.profileCircle {
+  background-color: red;
+  width: 40px;
+  height: 40px;
+  border-radius: 50px;
+}

@@ -1,0 +1,22 @@
+:root {
+  --nav-color: #bfbfbf;
+  --nav-active-color: #fff;
+  --complete-color: #008828;
+  --pending-color: #887F00;
+  --warn-color: #BF0000;
+  --border-color: #1B2430;
+  --background-color: #101924;
+
+  --text: 14px;
+  --title: 16px;
+  --nav-text: 20px;
+
+  --accent-family: 'Jersey 25', Inter;
+}
+
+body {
+  background-color: #0B1118;
+  min-width: 1440px;
+  margin: 0 auto;
+  padding: 0 30px;
+}
