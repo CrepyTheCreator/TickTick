@@ -5,9 +5,11 @@ import {
   useDispatch as dispatchHook,
   useSelector as selectorHook
 } from 'react-redux';
+import feedSlice from '../slices/feedSlice/feedSlice';
 //import userSlice from '../slices/userSlice/userSlice';
 
 const rootReducer = combineReducers({
+  feed: feedSlice
   //user: userSlice
 });
 

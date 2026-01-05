@@ -10,7 +10,6 @@ const initialState: TUserState = {
     email: '',
     profileColor: ''
   },
-  orderLoading: false,
   loginUserError: null,
   loginUserRequest: true
 };

@@ -1,0 +1,54 @@
+.card {
+  background-color: var(--background-color);
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-color);
+  transition: opacity .3s ease;
+  font-family: sans-serif;
+}
+
+.card:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.info {
+  display: flex;
+  gap: 15px;
+}
+
+.cardText {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: var(--text-common-color);
+}
+
+.ticketHeader {
+  display: flex;
+  gap: 10px;
+}
+
+.description {
+  max-width: 650px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.counters {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  color: #fff;
+  max-width: 120px;
+}
+
+.countContainer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}

@@ -1,0 +1,30 @@
+.button {
+  border: none;
+  color: #fff;
+  border-radius: 5px;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  font-family: sans-serif;
+  height: 32px;
+  font-size: 16px;
+  transition: opacity .3s ease;
+  cursor: pointer;
+}
+
+.fill {
+  background-color: var(--complete-color);
+}
+
+.transparent {
+  background-color: transparent;
+  border: 1px solid var(--border-color);
+}
+
+.button:hover {
+  opacity: 0.8;
+}
+
+.button:active {
+  opacity: 0.6;
+}
