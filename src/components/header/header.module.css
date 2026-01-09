@@ -1,3 +1,7 @@
+.activeLink {
+  cursor: default;
+}
+
 .header {
   padding: 15px 0;
   display: flex;

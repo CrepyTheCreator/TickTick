@@ -4,7 +4,7 @@ import note from '../../assets/note.svg';
 import share from '../../assets/share.svg'
 
 export interface IPostProps {
-  authorCircleColor: string;
+  authorProfileColor: string;
   author: string;
   text: string;
   type: 'main' | 'comments';
@@ -12,10 +12,10 @@ export interface IPostProps {
   answers?: number;
 }
 
-export default function Post ({authorCircleColor, author, text, type, views, answers}: IPostProps) {
+export default function Post ({authorProfileColor, author, text, type, views, answers}: IPostProps) {
   return (
     <div className={styles.container}>
-      <div className={styles.profileCircle} style={{backgroundColor: `#${authorCircleColor}`}}></div>
+      <div className={styles.profileCircle} style={{backgroundColor: `#${authorProfileColor}`}}></div>
       <div className={styles.post}>
         <div className={styles.author}>
           <span>{`@${author}`}</span>

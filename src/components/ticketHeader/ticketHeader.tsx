@@ -23,7 +23,7 @@ export default function TicketHeader ({isCompleted, answers, id, title}: ITicket
             <span className={styles.id}>{`#${id}`}</span>
           </div>
           <div className={styles.status} style={{backgroundColor: `#${ticketSwitch(answers, isCompleted, 'color')}`}}>
-            <span>Closed</span>
+            <span>{ticketSwitch(answers, isCompleted, 'text')}</span>
           </div>
         </div>
       </div>

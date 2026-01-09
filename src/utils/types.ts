@@ -32,3 +32,9 @@ export type Ticket = {
   }[];
 };
 
+export type Comment = {
+  commentId: number;
+  author: string;
+  authorProfileColor: string;
+  text: string;
+}

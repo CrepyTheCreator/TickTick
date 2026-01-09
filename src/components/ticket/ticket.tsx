@@ -1,47 +1,55 @@
 import { useLocation, useParams } from "react-router-dom";
-import { useState } from "react";
+import { useEffect } from "react";
 import styles from './ticket.module.css'
 import TicketHeader from "../ticketHeader/ticketHeader";
 import Button from "../button/button";
 import Post from "../post/post";
-import share from '../../assets/share.svg'
+import { useDispatch } from "../../service/store";
+import Comments from "../comments/comments";
+import Line from "../line/line";
 
 export default function Ticket () {
   const location = useLocation();
+  //const dispatch = useDispatch();
   //const { id } = useParams();
-
-  const [isOpen, setIsOpen] = useState(false);
-
   const data = location.state;
+  //useEffect(() => {
+  //  if(!data) {
+  //    dispatch(someFunc(id));
+  //  }
+  //})
+
   const lastComment = data?.comments[data.comments.length - 1];
-  console.log(lastComment)
   return (
     <>
       <div className={styles.container}>
         <TicketHeader isCompleted={data?.isTicketClosed} answers={data?.answers} id={data?.id} title={data?.title}/>
         <div className={styles.ticket}>
-          <Post author={data?.author} authorCircleColor={data?.authorProfileColor} text={data?.description} type="main" views={data?.views} answers={data?.answers}/>
-          <div className={styles.line}></div>
+          <Post author={data?.author} authorProfileColor={data?.authorProfileColor} text={data?.description} type="main" views={data?.views} answers={data?.answers}/>
+          <Line />
         </div>
         <div className={styles.commentsContainer}>
-          {data?.comments.length >= 2 && !isOpen ? 
-            <div className={styles.moreComments}>
-              <div className={styles.moreCommentText}>
-                <span>{`${data?.comments.length - 1} comments`}</span>
-                <Button type="transparent" onClick={() => setIsOpen(a => !a)}>Show</Button>
-              </div>
-              <div className={styles.line}></div>
-            </div> : null}
-            {data?.comments.length > 0 &&
-              <div className={styles.ticket}>
-                <Post author={lastComment?.author} authorCircleColor={lastComment?.authorProfileColor} text={lastComment?.text} type="comments"/>
-                <div className={styles.line}></div>
-              </div>
-            }
-            <div className={styles.commentInput}>
-              
+          <Comments comments={data?.comments}/>
+          {data?.comments.length > 0 &&
+            <div className={styles.ticket}>
+              <Post author={lastComment?.author} authorProfileColor={lastComment?.authorProfileColor} text={lastComment?.text} type="comments"/>
             </div>
+          }
         </div>
+        {!data?.isTicketClosed && 
+            <div className={styles.userComment}>
+              <Line />
+              <div className={styles.userCommentContainer}>
+              <textarea 
+                className={styles.commentInput}
+                placeholder="Type your comment here"
+                rows={4}
+                maxLength={500}
+              />
+                <Button type="fill" className={styles.commentBtn}>Send Comment</Button>
+              </div>
+            </div>
+            }
       </div>
     </>
   );

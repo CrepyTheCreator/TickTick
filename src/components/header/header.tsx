@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import styles from './header.module.css';
 import clsx from 'clsx';
 import logo from '../../assets/Logo.svg'

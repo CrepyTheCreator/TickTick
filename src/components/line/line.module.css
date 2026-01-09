@@ -1,0 +1,5 @@
+.line {
+  border: 1px solid var(--border-color);
+  height: 10px;
+  width: 0;
+}

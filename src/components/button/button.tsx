@@ -7,11 +7,12 @@ export interface IButtonProps {
   children: ReactNode;
   type: 'fill' | 'transparent'
   onClick?: () => void;
+  className?: string;
 }
 
 export default function Button (props: IButtonProps) {
   return (
-    <button className={clsx(styles.button, props.type === 'fill' ? styles.fill : styles.transparent)} onClick={props.onClick}>
+    <button className={clsx(styles.button, props.type === 'fill' ? styles.fill : styles.transparent, props.className)} onClick={props.onClick}>
       <span className={styles.text}>{props.children}</span>
     </button> 
   );

@@ -1,0 +1,40 @@
+/* Глобальные стили для анимаций */
+.comments-transition-enter {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+.comments-transition-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.comments-transition-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.comments-transition-exit-active {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.more-comments-transition-enter {
+  opacity: 0;
+}
+
+.more-comments-transition-enter-active {
+  opacity: 1;
+  transition: opacity 300ms;
+}
+
+.more-comments-transition-exit {
+  opacity: 1;
+}
+
+.more-comments-transition-exit-active {
+  opacity: 0;
+  transition: opacity 300ms;
+}
