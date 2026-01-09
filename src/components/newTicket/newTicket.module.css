@@ -1,0 +1,31 @@
+.main {
+  max-width: 1000px;
+  padding-left: 80px;
+}
+
+.ticketInputs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: #fff;
+  font-size: 18px;
+  font-family: var(--accent-family);
+}
+
+.titleInput {
+  border: 1px solid var(--border-color);
+  background-color: var(--background-color);
+  padding: 5px 15px;
+  color: #fff;
+  outline: none;
+  border-radius: 10px;
+  transition: border-color 0.3s ease;
+}
+
+.titleInput:focus {
+  border-color: #fff;
+}
+
+.btn {
+  margin-left: auto;
+}

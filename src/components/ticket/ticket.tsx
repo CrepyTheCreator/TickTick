@@ -7,6 +7,7 @@ import Post from "../post/post";
 import { useDispatch } from "../../service/store";
 import Comments from "../comments/comments";
 import Line from "../line/line";
+import TextArea from "../textArea/textArea";
 
 export default function Ticket () {
   const location = useLocation();
@@ -40,12 +41,7 @@ export default function Ticket () {
             <div className={styles.userComment}>
               <Line />
               <div className={styles.userCommentContainer}>
-              <textarea 
-                className={styles.commentInput}
-                placeholder="Type your comment here"
-                rows={4}
-                maxLength={500}
-              />
+                <TextArea size="small" placeholder="Type your text here"/>
                 <Button type="fill" className={styles.commentBtn}>Send Comment</Button>
               </div>
             </div>
