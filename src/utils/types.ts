@@ -13,6 +13,8 @@ export type TUserState = {
 export type TFeedState = {
   isLoading: boolean;
   tickets: Ticket[];
+  currentTicket: Ticket | null;
+  ticketLoading: boolean;
 };
 
 export type Ticket = {

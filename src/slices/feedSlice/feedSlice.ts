@@ -1,10 +1,12 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import type { TFeedState, Ticket } from '../../utils/types';
-import { getTicketList } from '../../utils/api';
+import { getTicketByIdApi, getTicketList } from '../../utils/api';
 
 const initialState: TFeedState = {
   isLoading: false,
-  tickets: []
+  tickets: [],
+  currentTicket: null,
+  ticketLoading: false
 };
 
 export const getFeedThunk = createAsyncThunk<Ticket[], void>(
@@ -24,13 +26,25 @@ export const getFeedThunk = createAsyncThunk<Ticket[], void>(
   }
 );
 
+export const getTicketByIdThunk = createAsyncThunk<Ticket, number>(
+  'feed/getTicket',
+  async (id: number) => {
+    const response = await getTicketByIdApi(id);
+    
+    return response;
+  }
+);
+
+
 const feedSlice = createSlice({
   name: 'feed',
   initialState,
   reducers: {},
   selectors: {
     getTickets: (state) => state.tickets,
-    getIsLoading: (state) => state.isLoading
+    getIsLoading: (state) => state.isLoading,
+    getCurrentTicket: (state) => state.currentTicket,
+    getTicketLoading: (state) => state.ticketLoading
   },
   extraReducers(builder) {
     builder
@@ -41,12 +55,21 @@ const feedSlice = createSlice({
         state.isLoading = false
       })
       .addCase(getFeedThunk.fulfilled, (state, action) => {
-        console.log('reload')
         state.isLoading = false
         state.tickets = action.payload
+      })
+      .addCase(getTicketByIdThunk.pending, (state) => {
+        state.ticketLoading = true
+      })
+      .addCase(getTicketByIdThunk.rejected, (state) => {
+        state.ticketLoading = false
+      })
+      .addCase(getTicketByIdThunk.fulfilled, (state, action) => {
+        state.ticketLoading = false
+        state.currentTicket = action.payload
       })
   }
 });
 
-export const { getTickets, getIsLoading } = feedSlice.selectors;
+export const { getTickets, getIsLoading, getCurrentTicket, getTicketLoading } = feedSlice.selectors;
 export default feedSlice.reducer;

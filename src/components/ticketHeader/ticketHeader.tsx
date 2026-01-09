@@ -1,6 +1,7 @@
 import styles from './ticketHeader.module.css'
 import Button from '../button/button';
 import { ticketSwitch } from '../../utils/functions';
+import { useNavigate } from 'react-router-dom';
 
 
 export interface ITicketHeaderProps {
@@ -12,7 +13,7 @@ export interface ITicketHeaderProps {
 }
 
 export default function TicketHeader ({isCompleted, answers, id, title}: ITicketHeaderProps) {
-
+  const navigate = useNavigate();
   return (
     <div className={styles.container}>
       <div className={styles.main}>
@@ -27,7 +28,7 @@ export default function TicketHeader ({isCompleted, answers, id, title}: ITicket
           </div>
         </div>
       </div>
-      <Button type='fill'>Create New</Button>
+      <Button type='fill' onClick={() => {navigate('/tickets')}}>Create New</Button>
     </div>
   );
 }

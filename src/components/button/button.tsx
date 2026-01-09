@@ -8,11 +8,13 @@ export interface IButtonProps {
   type: 'fill' | 'transparent'
   onClick?: () => void;
   className?: string;
+  submit?: boolean;
 }
 
 export default function Button (props: IButtonProps) {
   return (
-    <button className={clsx(styles.button, props.type === 'fill' ? styles.fill : styles.transparent, props.className)} onClick={props.onClick}>
+    
+    <button type={props.submit ? 'submit' : 'button'} className={clsx(styles.button, props.type === 'fill' ? styles.fill : styles.transparent, props.className)} onClick={props.onClick}>
       <span className={styles.text}>{props.children}</span>
     </button> 
   );

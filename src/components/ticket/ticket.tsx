@@ -1,26 +1,33 @@
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import styles from './ticket.module.css'
 import TicketHeader from "../ticketHeader/ticketHeader";
 import Button from "../button/button";
 import Post from "../post/post";
-import { useDispatch } from "../../service/store";
+import { useDispatch, useSelector } from "../../service/store";
 import Comments from "../comments/comments";
 import Line from "../line/line";
 import TextArea from "../textArea/textArea";
+import { getCurrentTicket, getTicketByIdThunk, getTicketLoading } from "../../slices/feedSlice/feedSlice";
+import { Preloader } from "../preloader/preloader";
 
 export default function Ticket () {
-  const location = useLocation();
-  //const dispatch = useDispatch();
-  //const { id } = useParams();
-  const data = location.state;
-  //useEffect(() => {
-  //  if(!data) {
-  //    dispatch(someFunc(id));
-  //  }
-  //})
+  const data = useSelector(getCurrentTicket);
+  const loading = useSelector(getTicketLoading);
+  const dispatch = useDispatch();
+  const { id } = useParams();
 
-  const lastComment = data?.comments[data.comments.length - 1];
+  useEffect(() => {
+    if(!data || data?.id !== Number(id)) {
+      dispatch(getTicketByIdThunk(Number(id)));
+      console.log('Call')
+    }
+  }, [])
+
+  if (loading || !data) return <Preloader />
+
+  const lastComment = data.comments[data.comments.length - 1];
+
   return (
     <>
       <div className={styles.container}>
