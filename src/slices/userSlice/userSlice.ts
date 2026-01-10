@@ -7,11 +7,10 @@ const initialState: TUserState = {
   isAuthenticated: false,
   data: {
     name: '',
-    email: '',
     profileColor: ''
   },
   loginUserError: null,
-  loginUserRequest: true
+  loginUserRequest: false
 };
 
 //export const loginUser = createAsyncThunk(
@@ -32,7 +31,7 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     logout: (state) => {
-      state.data = { email: '', name: '', profileColor: ''};
+      state.data = { name: '', profileColor: ''};
       deleteCookie('accessToken');
       localStorage.removeItem('refreshToken');
       state.isAuthenticated = false;
@@ -40,7 +39,10 @@ const userSlice = createSlice({
     }
   },
   selectors: {
-    getUser: (state) => state.data
+    getUser: (state) => state.data,
+    getUserRequest: (state) => state.loginUserRequest,
+    getAuthCheck: (state) => state.isAuthChecked,
+    getAuthenticate: (state) => state.isAuthenticated
   },
   //extraReducers(builder) {
   //  
@@ -49,6 +51,9 @@ const userSlice = createSlice({
 
 export const { logout } = userSlice.actions;
 export const {
-  getUser
+  getUser,
+  getUserRequest,
+  getAuthCheck,
+  getAuthenticate
 } = userSlice.selectors;
 export default userSlice.reducer;

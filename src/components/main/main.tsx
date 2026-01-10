@@ -16,7 +16,7 @@ export default function Main () {
     if(!tickets || tickets.length === 0) {
       dispatch(getFeedThunk())
     }
-  }, [])
+  }, [tickets])
 
   return (
     <div className={styles.container}>

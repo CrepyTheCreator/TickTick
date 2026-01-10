@@ -1,7 +1,11 @@
 import styles from './line.module.css'
 
-export default function Line () {
+interface TLineProps {
+  type?: 'horizontal' | 'vertical'
+}
+
+export default function Line ({type}: TLineProps) {
   return (
-    <div className={styles.line}></div>
+    <div className={type === 'horizontal' ? styles.horizontal : styles.line}></div>
   );
 }

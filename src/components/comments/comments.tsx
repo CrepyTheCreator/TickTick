@@ -31,7 +31,7 @@ export default function Comments ({comments}: ICommentsProps) {
         {commonComments.map((el, i) => {
           return (
             <>
-            <Post author={el.author} authorProfileColor={el.authorProfileColor} text={el.text} type='comments'/>
+            <Post author={el.author} authorProfileColor={el.authorProfileColor} text={el.text} type='comments' key={i}/>
             {i !== commonComments.length - 1 ? <Line /> : null}
             </>
           )

@@ -15,7 +15,7 @@ export interface IPostProps {
 export default function Post ({authorProfileColor, author, text, type, views, answers}: IPostProps) {
   return (
     <div className={styles.container}>
-      <div className={styles.profileCircle} style={{backgroundColor: `#${authorProfileColor}`}}></div>
+      <div className={styles.profileCircle} style={{backgroundColor: authorProfileColor}}></div>
       <div className={styles.post}>
         <div className={styles.author}>
           <span>{`@${author}`}</span>

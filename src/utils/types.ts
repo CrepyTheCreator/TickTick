@@ -2,7 +2,6 @@ export type TUserState = {
   isAuthChecked: boolean;
   isAuthenticated: boolean;
   data: {
-    email: string;
     name: string;
     profileColor: string;
   };

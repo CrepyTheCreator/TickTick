@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import styles from './ticket.module.css'
 import TicketHeader from "../ticketHeader/ticketHeader";
@@ -10,10 +10,13 @@ import Line from "../line/line";
 import TextArea from "../textArea/textArea";
 import { getCurrentTicket, getTicketByIdThunk, getTicketLoading } from "../../slices/feedSlice/feedSlice";
 import { Preloader } from "../preloader/preloader";
+import { getAuthenticate } from "../../slices/userSlice/userSlice";
 
 export default function Ticket () {
   const data = useSelector(getCurrentTicket);
   const loading = useSelector(getTicketLoading);
+  const isAuthenticated = useSelector(getAuthenticate);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id } = useParams();
 
@@ -22,7 +25,7 @@ export default function Ticket () {
       dispatch(getTicketByIdThunk(Number(id)));
       console.log('Call')
     }
-  }, [])
+  }, [data])
 
   if (loading || !data) return <Preloader />
 
@@ -47,11 +50,16 @@ export default function Ticket () {
         {!data?.isTicketClosed && 
             <div className={styles.userComment}>
               <Line />
+              {isAuthenticated ?
               <div className={styles.userCommentContainer}>
                 <TextArea size="small" placeholder="Type your text here"/>
                 <Button type="fill" className={styles.commentBtn}>Send Comment</Button>
-              </div>
-            </div>
+              </div> : 
+              <div className={styles.needAuth}>
+                <span className={styles.needAuthText}>You need to log in to send comments</span>
+                <Button type="fill" onClick={() => {navigate('/login')}}>Log in</Button>
+              </div>}
+            </div> 
             }
       </div>
     </>

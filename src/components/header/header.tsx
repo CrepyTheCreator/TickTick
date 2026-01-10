@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 import styles from './header.module.css';
 import clsx from 'clsx';
 import logo from '../../assets/Logo.svg'
@@ -12,6 +12,7 @@ export default function Header () {
   }
 
   return (
+    <>
     <div className={styles.header}>
       <img src={logo} alt="Logo" className={styles.logo}/>
       <nav className={styles.nav}>
@@ -30,5 +31,7 @@ export default function Header () {
         <div className={styles.profileCircle} style={userCircleStyles}/>
       </div>
     </div>
+    <Outlet/>
+    </>
   );
 }

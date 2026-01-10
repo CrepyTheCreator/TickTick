@@ -14,6 +14,23 @@ export type TCreateTicketResponse = {
   id: number;
 }
 
+export type TRegisterData = {
+  username: string;
+  password: string;
+  profileColor: string;
+}
+
+export type TLoginData = {
+  username: string;
+  password: string;
+}
+
+export type TUserApiResponse = {
+  username: string;
+  accessToken: string;
+  refreshToken: string;
+}
+
 export const getTicketList = async (): Promise<TFeedApiResponse> => {
   const response = await fetch(`${BASE_URL}/tickets`);
   const data = await checkResponse<TFeedApiResponse>(response);
@@ -39,5 +56,29 @@ export const createTicket = async (title: string, description: string): Promise<
     })
   })
   const data = await checkResponse<TCreateTicketResponse>(response);
+  return data;
+}
+
+export const registerUserApi = async (registerData: TRegisterData): Promise<TUserApiResponse> => {
+  const response = await fetch(`${BASE_URL}/register`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8'
+    },
+    body: JSON.stringify(registerData)
+  })
+  const data = await checkResponse<TUserApiResponse>(response);
+  return data;
+}
+
+export const loginUserApi = async (loginData: TLoginData): Promise<TUserApiResponse> => {
+  const response = await fetch(`${BASE_URL}/login`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8'
+    },
+    body: JSON.stringify(loginData)
+  })
+  const data = await checkResponse<TUserApiResponse>(response);
   return data;
 }
