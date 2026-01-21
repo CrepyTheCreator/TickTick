@@ -6,17 +6,20 @@ import TicketElement from '../ticketElement/ticketElement';
 import styles from './main.module.css';
 import question from '../../assets/question.png';
 import { Preloader } from '../preloader/preloader';
+import { useNavigate } from 'react-router-dom';
 
 export default function Main () {
   const tickets = useSelector(getTickets);
   const isLoading = useSelector(getIsLoading);
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
+  const reverse = tickets?.slice().reverse();
+  
   useEffect(() => {
     if(!tickets || tickets.length === 0) {
       dispatch(getFeedThunk())
     }
-  }, [tickets])
+  }, [])
 
   return (
     <div className={styles.container}>
@@ -26,7 +29,7 @@ export default function Main () {
           <div className={styles.searchContainer}>
             <input className={styles.searchInput} type="input" placeholder='Type here to search something..'/>
           </div>
-          <Button type='fill'>UpDate List</Button>
+          <Button type='fill' onClick={() => dispatch(getFeedThunk())}>Update List</Button>
           <Button type='fill'>Search</Button>
         </div>
         <div className={styles.ticketsList}>
@@ -38,9 +41,9 @@ export default function Main () {
               <span className={styles.emptyTitle}>No Tickets</span>
               <span className={styles.emptyDescription}>be the first to create a new ticket.</span>
             </div>
-            <Button type='fill'>Create New Ticket</Button>
-          </div> : ''}
-          {tickets?.map((el) => {
+            <Button type='fill' onClick={() => {navigate('/tickets')}}>Create New Ticket</Button>
+          </div> : '' }
+          {reverse?.map((el) => {
             return <TicketElement ticketInfo={el} key={el.id}/>
           })}
         </div>

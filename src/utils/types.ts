@@ -30,7 +30,7 @@ export type Ticket = {
       author: string;
       authorProfileColor: string;
       text: string;
-  }[];
+  }[] | [];
 };
 
 export type Comment = {

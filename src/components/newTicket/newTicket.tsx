@@ -5,9 +5,12 @@ import styles from './newTicket.module.css'
 import { createTicket } from '../../utils/api';
 import { useNavigate } from 'react-router-dom';
 import { Preloader } from '../preloader/preloader';
+import { useSelector } from '../../service/store';
+import { getUser } from '../../slices/userSlice/userSlice';
 
 export default function NewTicket () {
   const navigate = useNavigate();
+  const user = useSelector(getUser);
   const [loading, setLoading] = useState(false);
   const titleTextRef = useRef<HTMLInputElement>(null);
   const descriptionRef = useRef<HTMLTextAreaElement | null>(null);
@@ -18,6 +21,7 @@ export default function NewTicket () {
       try {
         setLoading(true);
         const data = await createTicket(
+          user.name,
           titleTextRef.current.value, 
           descriptionRef.current.value
         );

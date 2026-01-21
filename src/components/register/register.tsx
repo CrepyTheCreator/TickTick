@@ -4,18 +4,25 @@ import styles from './register.module.css';
 import { Preloader } from '../preloader/preloader';
 import logo from '../../assets/Logo.svg'
 import Line from '../line/line';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { getAuthenticate, getUserRequest, registerUser } from '../../slices/userSlice/userSlice';
+import { useDispatch, useSelector } from '../../service/store';
 
 export default function Register () {
+  const dispatch = useDispatch();
   const colorRef = useRef<HTMLInputElement>(null);
-  const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const [name, setName] = useState('');
-  const loading = false;
+  const loading = useSelector(getUserRequest);
+  const isAuthenticated = useSelector(getAuthenticate);
+  const navigate = useNavigate();
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
-    console.log(name, emailRef.current?.value, passwordRef.current?.value, colorRef.current?.value)
+    if(passwordRef.current && colorRef.current) {
+      dispatch(registerUser({username: name, password: passwordRef.current?.value, profileColor: colorRef.current?.value}))
+      if(isAuthenticated) navigate('/', { replace: true })
+    }
   }
   
   const onChange = (e:ChangeEvent<HTMLInputElement>) => {

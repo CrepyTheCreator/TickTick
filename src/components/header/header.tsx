@@ -2,13 +2,18 @@ import { NavLink, Outlet } from 'react-router-dom';
 import styles from './header.module.css';
 import clsx from 'clsx';
 import logo from '../../assets/Logo.svg'
+import { useSelector } from 'react-redux';
+import { getUser, logout } from '../../slices/userSlice/userSlice';
+import { useDispatch } from '../../service/store';
 
 export default function Header () {
-  const userName = 'SomeUserName';
+  const dispatch = useDispatch();
+  const data = useSelector(getUser);
+  const userName = data ? data.name : 'Need to login';
   const userTickets = 10;
-  const userColor = 'fff'
+  const userColor = data ? data.profileColor : '#fff'
   const userCircleStyles = {
-    backgroundColor: `#${userColor}`,
+    backgroundColor: `${userColor}`,
   }
 
   return (
@@ -28,7 +33,7 @@ export default function Header () {
             <span className={styles.ticketsValue}>{userTickets}</span>
           </div>
         </div>
-        <div className={styles.profileCircle} style={userCircleStyles}/>
+        <div className={styles.profileCircle} onClick={() => {dispatch(logout())}} style={userCircleStyles}/>
       </div>
     </div>
     <Outlet/>

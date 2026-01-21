@@ -6,8 +6,16 @@ import NewTicket from '../newTicket/newTicket'
 import ProtectedRoute from '../../protect/protectedRoute'
 import Register from '../register/register'
 import Login from '../login/login'
+import { useDispatch } from '../../service/store'
+import { useEffect } from 'react'
+import { refreshUser } from '../../slices/userSlice/userSlice'
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(()=> {
+    dispatch(refreshUser());
+  }, [])
   return (
     <>
       <Routes>

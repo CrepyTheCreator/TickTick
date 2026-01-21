@@ -4,16 +4,23 @@ import styles from './login.module.css';
 import { Preloader } from '../preloader/preloader';
 import logo from '../../assets/Logo.svg'
 import Line from '../line/line';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from '../../service/store';
+import { getUserRequest, loginUser } from '../../slices/userSlice/userSlice';
 
 export default function Login () {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const usernameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
-  const loading = false;
+  const loading = useSelector(getUserRequest);
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
-    console.log(passwordRef.current?.value, usernameRef.current?.value)
+    if(usernameRef.current && passwordRef.current) {
+      dispatch(loginUser({username: usernameRef.current?.value, password: passwordRef.current?.value}))
+      navigate(`/`)
+    }
   }
   
   return (

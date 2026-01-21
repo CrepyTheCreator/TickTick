@@ -38,3 +38,8 @@
 .id {
   color: var(--text-common-color);
 }
+
+.buttons {
+  display: flex;
+  gap: 10px;
+}
